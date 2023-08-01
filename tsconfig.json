@@ -4,7 +4,13 @@
 	  "module": "commonjs", // 컴파일된 코드의 모듈 시스템을 지정합니다. 예를 들어, "CommonJS", "UMD", "ES2015", "ESNext", "AMD", "System", "None" 등을 지정할 수 있습니다.
 	  "outDir": "./dist", // 컴파일된 JavaScript 파일이 위치할 디렉토리를 지정합니다.
 	  "strict": true, // 모든 엄격한 타입-체크 옵션을 활성화합니다.
-	  "esModuleInterop": true
+	  "esModuleInterop": true,
+	  "baseUrl": ".", // paths 옵션에 영향
+	  "paths": { // 경로 alias
+		"@route/*": [
+			"src/routes/*"
+		]
+	  }
 	},
 	"include": [
 	  "src/**/*.ts"
@@ -12,7 +18,7 @@
 	"exclude": [
 	  "node_modules"
 	],
-	"paths": {
-		"@src": ["src/*"]
+	"ts-node": {
+		"require": ["tsconfig-paths/register"]
 	}
-      }
+}
