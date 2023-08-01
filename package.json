@@ -3,9 +3,8 @@
     "util:ts-paths": "node -r tsconfig-paths/register",
     "dev": "nodemon ./src/app.ts",
     "start": "node ./src/app.ts",
-    "build": "tsc --project tsconfig.json && npx tsc-alias -p tsconfig.json",
     "test": "jest",
-    "test:watch": "npm run test -- --watch",
+    "test:watch": "npm run test --verbose --coverage --forceExit --watchAll --maxWorkers=1",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
@@ -38,22 +37,5 @@
     "ts-jest": "^29.1.1",
     "tsc-alias": "^1.8.7",
     "tsconfig-paths": "^4.2.0"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": ".",
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
   }
 }

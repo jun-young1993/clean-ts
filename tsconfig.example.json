@@ -1,0 +1,33 @@
+{
+	"compilerOptions": { // 이 객체는 TypeScript 컴파일러의 동작을 제어하는 다양한 설정을 포함합니다.
+	  "target": "es6", // 컴파일된 JavaScript가 실행될 ECMAScript 버전을 지정합니다. 예를 들어, "ES5", "ES2015", "ES2016", "ESNext" 등을 지정할 수 있습니다.
+	  "module": "commonjs", // 컴파일된 코드의 모듈 시스템을 지정합니다. 예를 들어, "CommonJS", "UMD", "ES2015", "ESNext", "AMD", "System", "None" 등을 지정할 수 있습니다.
+	  "outDir": "./dist", // 컴파일된 JavaScript 파일이 위치할 디렉토리를 지정합니다.
+	  "strict": true, // 모든 엄격한 타입-체크 옵션을 활성화합니다.
+	  "esModuleInterop": true,
+		"resolveJsonModule": true, // json module 활성화
+		"rootDir": "./",
+	  "baseUrl": ".", // paths 옵션에 영향
+	  "paths": { // 경로 alias
+	  	"@app/*": [
+			"src/*"
+		],
+  		"@api/*": [
+			"src/api/*"
+		],
+		"@route/*": [
+			"src/routes/*"
+		]
+	  }
+	},
+	"include": [
+	  "src/**/*.ts",
+		"__tests__/**.*.ts"
+	],
+	"exclude": [
+	  "node_modules"
+	],
+	"ts-node": { // paths를 활성화 하기 위해 ts-node 와 tsconfig-paths를 다운로드함 ts-node에 대해서 자세히 알아야할듯
+		"require": ["tsconfig-paths/register"]
+	}
+}
