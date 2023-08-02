@@ -30,7 +30,8 @@ npm i -D @types/supertest supertest
 ├── src/
 │   ├── app.ts           # App entry point
 │   ├── api/             # Express route controllers for all the endpoints of the app
-│   ├── routes/		
+│   ├── routes/
+│   ├── controller/	 	
 │   ├── config/          # Environment variables and configuration related stuff
 │   ├── loaders/         # Split the startup process into modules
 │   ├── models/          # Database models
@@ -56,3 +57,82 @@ src/middleware/: 이 폴더는 커스텀 Express 미들웨어를 포함합니다
 src/subscribers/: 이 폴더는 비동기 작업에 대한 이벤트 핸들러를 포함합니다.
 src/types/: 이 폴더는 타입 선언 파일 (.d.ts 파일)을 포함합니다.
 src/utils/: 이 폴더는 유틸리티 클래스와 함수를 포함합니다.
+
+
+
+---
+jest 환경 세팅하기
+
+npm i jest
+npm i -D @types/jest babel-jest ts-jest
+
+
+jest.config.ts
+```
+/** @type {import('ts-jest').JestConfigWithTsJest} */
+import { pathsToModuleNameMapper } from 'ts-jest'
+import type { JestConfigWithTsJest } from 'ts-jest'
+import {compilerOptions} from './tsconfig.json';
+// const tsconfig = JSON.parse(readFileSync(`${__dirname}/tsconfig.json`, 'utf8'));
+// const { compilerOptions } = tsconfig;
+
+
+
+const jestConfig: JestConfigWithTsJest = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  moduleFileExtensions: [
+      "js",
+      "json",
+      "ts"
+  ],
+  rootDir: ".",
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
+  transform: {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  collectCoverageFrom: ["**/*.(t|j)s"],
+  coverageDirectory: "../coverage",
+    roots: ['<rootDir>'],
+  modulePaths: [compilerOptions.baseUrl], // jest는 따로 맵핑해야함
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths)
+};
+
+export default jestConfig;
+
+
+
+```
+
+package.json
+```
+"script" : {
+	"test": "jest",
+}
+
+```
+
+// npm 라이브러리 비교
+https://npmtrends.com/diskdb-vs-lokijs-vs-lowdb-vs-nedb-vs-nedb-promise-vs-node-json-db
+
+
+## lowdb
+npm i lowdb
+
+어뎁터 로 유연한게 기능 커스텀이 가능할것 같아서
+
+
+---
+const object1 = { a: 1, b: 2 };
+const object2 = { c: 3, d: 4 };
+
+const result1 = Object.assign({}, object1, object2);
+console.log(result1); // { a: 1, b: 2, c: 3, d: 4 }
+console.log(object1); // { a: 1, b: 2 } (원본 객체는 변경되지 않음)
+
+const result2 = Object.assign(object1, object2);
+console.log(result2); // { a: 1, b: 2, c: 3, d: 4 }
+console.log(object1); // { a: 1, b: 2, c: 3, d: 4 } (원본 객체가 변경됨)
+첫 번째 예제에서는 Object.assign({}, object1, object2)를 사용하여 새로운 객체에 object1과 object2의 속성을 모두 복사했습니다. object1과 object2는 그대로 유지됩니다.
+
+두 번째 예제에서는 Object.assign(object1, object2)를 사용하여 object1에 object2의 속성을 복사했습니다. 따라서 object1은 변경되고, object2는 그대로 유지됩니다.

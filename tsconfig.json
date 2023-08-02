@@ -15,8 +15,23 @@
   		"@api/*": [
 			"src/api/*"
 		],
+		"@models/*": [
+			"src/models/*"
+		],
 		"@route/*": [
 			"src/routes/*"
+		],
+		"@controller/*": [
+			"src/controllers/*"
+		],
+		"@config/*": [
+			"src/config/*"
+		],
+		"@constant" : [
+			"src/config/constants.ts"
+		],
+		"@interface/*": [
+			"src/interfaces/*"
 		]
 	  }
 	},

@@ -1,9 +1,9 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
+
+import {index} from "@app/controllers/test.controller";
 
 const router = Router();
 
-router.get('/', (req: Request, res: Response) => {
-  res.json({ message: 'GET /api/tests' });
-});
+router.get('/', index);
 
 export default router;
