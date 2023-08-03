@@ -15,7 +15,7 @@
   		"@api/*": [
 			"src/api/*"
 		],
-		"@models/*": [
+		"@model/*": [
 			"src/models/*"
 		],
 		"@route/*": [

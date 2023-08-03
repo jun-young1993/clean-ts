@@ -118,8 +118,9 @@ https://npmtrends.com/diskdb-vs-lokijs-vs-lowdb-vs-nedb-vs-nedb-promise-vs-node-
 
 ## lowdb
 npm i lowdb
+1. typescript 지원
+2. 어뎁터 로 유연한게 기능 커스텀이 가능할것 같아서
 
-어뎁터 로 유연한게 기능 커스텀이 가능할것 같아서
 
 
 ---
@@ -136,3 +137,59 @@ console.log(object1); // { a: 1, b: 2, c: 3, d: 4 } (원본 객체가 변경됨)
 첫 번째 예제에서는 Object.assign({}, object1, object2)를 사용하여 새로운 객체에 object1과 object2의 속성을 모두 복사했습니다. object1과 object2는 그대로 유지됩니다.
 
 두 번째 예제에서는 Object.assign(object1, object2)를 사용하여 object1에 object2의 속성을 복사했습니다. 따라서 object1은 변경되고, object2는 그대로 유지됩니다.
+
+
+
+
+-- lowdb를 사용하면서
+순수 ESM 패키지는 다음과 같은 특징을 가지고 있습니다:
+
+package.json의 "type" 필드: package.json 파일의 "type" 필드는 "module"로 설정되어 있습니다. 이것은 해당 패키지가 ECMAScript Modules로 작성되었음을 나타냅니다.
+
+.js 확장자: 모든 모듈 파일은 .js 확장자를 가지고 있으며, import/export 키워드를 사용하여 다른 모듈과 상호작용합니다.
+
+Import/Export 구문: 순수 ESM 패키지는 require() 함수 대신 import 구문을 사용하여 다른 모듈을 불러오고, module.exports 대신 export 구문을 사용하여 기능을 내보냅니다.
+
+예를 들어, 순수 ESM 패키지의 package.json 파일은 다음과 같이 설정될 수 있습니다:
+
+
+error : Error [ERR_REQUIRE_ESM]: require() of ES Module D:\app\source\clean-ts\node_modules\lowdb\lib\index.js
+
+
+위에꺼 하려고  tsconfig
+ 	  "target": "ESNext",
+	  "module": "ESNext",
+    이걸로바꾸고 최신기술 또는 앞으로 테스트중인 기능 사용할수 있다고해서
+
+    package.json 
+    "type" : "module"
+     로 바꾸라 해서 바꾸니 에러뜸
+
+TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for D:\app\source\clean-ts\src\app.ts
+
+
+"ts-node" : {
+  "esm" : true // «———— enabling ESM for ts-node  
+}
+
+
+
+https://tesseractjh.tistory.com/272
+
+esModuleInterop : true
+module: commonJs
+와 같이 변경시 
+\ts-node\dist\index.js:851
+            return old(m, filename);
+            에러가 발생한다면 
+
+            해당 특정라이브러리에서 requrie 구문을 사요하고 있는것이다
+
+lowdb 사용 포기... 버그가 너무 많음..
+
+nedb-promise 
+typescript , promise 지원
+
+d.ts파일에 대해서
+
+interface 의 키값만 가져오기
