@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 
 import BaseModel from "@model/base.model";
+// https://github.com/bajankristof/nedb-promises/blob/master/test/a.create.test.js
 describe('base model', () => {
 	
 	it('create db file', async () => {
