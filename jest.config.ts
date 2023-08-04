@@ -16,7 +16,10 @@ const jestConfig: JestConfigWithTsJest = {
       "ts"
   ],
   rootDir: ".",
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
+  // testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
+  testMatch: [
+    '<rootDir>/__tests__/**/*.spec.ts'
+  ],
   transform: {
     "^.+\\.(t|j)s$": "ts-jest"
   },

@@ -27,10 +27,13 @@ export default class BaseModel<TDocument = {_id: string}> {
 	}
 
 	private initialize():NeDB<TDocument> {
+		
 		return NeDB.create({
 			filename: this.getPath(),
 			autoload: true
 		});
+		
+		
 	}
 
 	public getDB(): NeDB<TDocument> {

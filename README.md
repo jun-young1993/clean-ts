@@ -193,3 +193,6 @@ typescript , promise 지원
 d.ts파일에 대해서
 
 interface 의 키값만 가져오기
+
+## npm i -g jest-cli 
+jest 명령어를 사용하여 단일 파일도 테스트 할수있게 해준다
